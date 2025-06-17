@@ -30,6 +30,16 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Run
+                  name: Build Java Project
+                  identifier: Build_Java_Project
+                  spec:
+                    connectorRef: Harness_Docker
+                    image: maven:3.8-jdk-8
+                    shell: Sh
+                    command: mvn clean install
+                  description: Build Java Project
+              - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
@@ -39,6 +49,7 @@ pipeline:
                     tags:
                       - latest
                     dockerfile: service-one/src/main/docker/Dockerfile
+                    context: service-one/target
               - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_2
@@ -49,3 +60,4 @@ pipeline:
                     tags:
                       - latest
                     dockerfile: service-two/src/main/docker/Dockerfile
+                    context: service-two/target
