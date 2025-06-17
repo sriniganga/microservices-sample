@@ -38,6 +38,7 @@ pipeline:
                     repo: sriniganga/service-one
                     tags:
                       - latest
+                    dockerfile: service-one/src/main/docker/Dockerfile
               - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_2
@@ -47,3 +48,4 @@ pipeline:
                     repo: sriniganga/service-two
                     tags:
                       - latest
+                    dockerfile: service-two/src/main/docker/Dockerfile
